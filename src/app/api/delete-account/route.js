@@ -14,7 +14,6 @@ export async function POST(req) {
     }
 
     const newRequest = new DeleteRequest(body);
-    console.log(newRequest,'new');
     
     await newRequest.save();
 
@@ -22,7 +21,7 @@ export async function POST(req) {
       { message: "Account deletion request submitted successfully!" },
       { status: 201 }
     );
-    // return NextResponse.json({ message: "Account deletion request submitted" }, { status: 201 });
+    
   } catch (error) {
     console.error("Error submitting account deletion request:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
