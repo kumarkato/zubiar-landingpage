@@ -16,10 +16,11 @@ export default function DeleteAccountForm() {
     }));
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Form Data Submitted:", formData);
-    alert("Account deletion request submitted!");
+    // alert("Account deletion request submitted!");
   };
 
   return (
