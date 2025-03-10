@@ -16,11 +16,34 @@ export default function DeleteAccountForm() {
     }));
   };
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log("Form Data Submitted:", formData);
+  //   // alert("Account deletion request submitted!");
+  // };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-    // alert("Account deletion request submitted!");
+
+    try {
+      const response = await fetch("/api/delete-account", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Account deletion request submitted successfully.");
+        setFormData({ name: "", phone: "", email: "", description: "" });
+      } else {
+        alert(data.message || "Failed to submit request.");
+      }
+    } catch (error) {
+      console.log("Error submitting request:", error);
+      // alert("An error occurred. Please try again.");
+    }
   };
 
   return (
@@ -30,8 +53,8 @@ export default function DeleteAccountForm() {
           Delete Your Account
         </h1>
         <p className="text-md text-gray-600">
-          Your feedback matters to us. Let us know why you&apos;re leaving so we can
-          enhance our service.
+          Your feedback matters to us. Let us know why you&apos;re leaving so we
+          can enhance our service.
         </p>
       </div>
 
